@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <PackageId>Silmoon.Data.LiteDB</PackageId>
+    <Version>1.7.0</Version>
+    <Authors>SILMOON</Authors>
+    <Company>SILMOON LLC</Company>
+    <Description>Silmoon SDK</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/silmoonsone/Silmoon.Data</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/silmoonsone/Silmoon.Data.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>silmoon</PackageTags>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageOutputPath>..\packages_out</PackageOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LiteDB" Version="5.0.21" />
+    <PackageReference Include="Silmoon" Version="1.7.0" />
+    <PackageReference Include="Silmoon.Extension" Version="1.6.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Silmoon.Data.MongoDB\Silmoon.Data.MongoDB.csproj" />
+  </ItemGroup>
+
+</Project>

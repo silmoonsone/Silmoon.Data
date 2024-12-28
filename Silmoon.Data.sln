@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silmoon.Data", "Silmoon.Data\Silmoon.Data.csproj", "{1B32D01B-027F-474D-B798-EEB8D113D576}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silmoon.Data.MongoDB", "Silmoon.Data.MongoDB\Silmoon.Data.MongoDB.csproj", "{8212136E-51DE-4338-8BAB-980D3917ACAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silmoon.Data.LiteDB", "Silmoon.Data.LiteDB\Silmoon.Data.LiteDB.csproj", "{8A6109BB-A8CA-4941-BFB3-F139267B7A30}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{8BC36528-F5A8-4823-9279-4D64AD055CC7}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		logo.png = logo.png
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silmoon.Data.SqlServer", "Silmoon.Data.SqlServer\Silmoon.Data.SqlServer.csproj", "{EF87209D-A706-41CC-A647-9FE61AF4D0AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormTest", "WinFormTest\WinFormTest.csproj", "{E7E11958-3964-4A60-A61B-BCF567A24D3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B32D01B-027F-474D-B798-EEB8D113D576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B32D01B-027F-474D-B798-EEB8D113D576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B32D01B-027F-474D-B798-EEB8D113D576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B32D01B-027F-474D-B798-EEB8D113D576}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8212136E-51DE-4338-8BAB-980D3917ACAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8212136E-51DE-4338-8BAB-980D3917ACAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8212136E-51DE-4338-8BAB-980D3917ACAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8212136E-51DE-4338-8BAB-980D3917ACAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A6109BB-A8CA-4941-BFB3-F139267B7A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A6109BB-A8CA-4941-BFB3-F139267B7A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A6109BB-A8CA-4941-BFB3-F139267B7A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A6109BB-A8CA-4941-BFB3-F139267B7A30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF87209D-A706-41CC-A647-9FE61AF4D0AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF87209D-A706-41CC-A647-9FE61AF4D0AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF87209D-A706-41CC-A647-9FE61AF4D0AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF87209D-A706-41CC-A647-9FE61AF4D0AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7E11958-3964-4A60-A61B-BCF567A24D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7E11958-3964-4A60-A61B-BCF567A24D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7E11958-3964-4A60-A61B-BCF567A24D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7E11958-3964-4A60-A61B-BCF567A24D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
