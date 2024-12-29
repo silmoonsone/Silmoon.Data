@@ -26,7 +26,7 @@ namespace Silmoon.Data.SqlServer
 {
     public static class SqlHelper
     {
-        private static string[] regTypeClassName = new string[] { "DateTime", "String", "Boolean", "Int16", "UInt16", "Int32", "UInt32", "Int64", "UInt64", "Decimal", "Guid", "ObjectId", "Byte[]", "Int32[]", "String[]" };
+        private static readonly string[] regTypeClassName = { "DateTime", "String", "Boolean", "Int16", "UInt16", "Int32", "UInt32", "Int64", "UInt64", "Decimal", "Guid", "ObjectId", "Byte[]", "Int32[]", "String[]" };
         public static (T[] Results, NameObjectCollection<object>[] DataCollections) DeserializeObjects<T>(this SqlDataReader reader, string[] excludedField = null) where T : new()
         {
             List<T> result = new List<T>();
@@ -145,7 +145,7 @@ namespace Silmoon.Data.SqlServer
             return (obj, data);
         }
 
-        public static void AddParameters(this SqlCommand sqlCommand, Dictionary<string, SimplePropertyInfo> fieldInfos, params string[] paraNames)
+        public static void AddParameters(this SqlCommand sqlCommand, Dictionary<string, PropertyValueInfo> fieldInfos, params string[] paraNames)
         {
             if (fieldInfos != null)
             {
@@ -193,7 +193,7 @@ namespace Silmoon.Data.SqlServer
                 }
             }
         }
-        public static void AddParameters(this SqlCommand sqlCommand, Dictionary<string, SimplePropertyInfo> fieldInfos)
+        public static void AddParameters(this SqlCommand sqlCommand, Dictionary<string, PropertyValueInfo> fieldInfos)
         {
             if (fieldInfos != null)
             {

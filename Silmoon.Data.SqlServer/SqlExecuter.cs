@@ -27,7 +27,7 @@ namespace Silmoon.Data.SqlServer
         }
         public SqlExecuteResult AddObject<T>(string tableName, T obj)
         {
-            var fieldInfos = getFieldInfos(obj, false);
+            var fieldInfos = obj.GetPropertyValues("id");
 
             string sql = $"INSERT INTO [{SqlHelper.SafeSqlWord(tableName)}] (";
             foreach (var item in fieldInfos)
@@ -53,7 +53,7 @@ namespace Silmoon.Data.SqlServer
         {
             if (options == null) options = SqlQueryOptions.Create();
             if ((options.Count.HasValue || options.Offset.HasValue) && (options.Sorts == null || options.Sorts.Count() == 0)) throw new ArgumentException("指定分页参数的时候不能缺少Sorts指定。", "SqlQueryOptions::Sorts");
-            var fieldInfos = getFieldInfos(whereObject, true);
+            var fieldInfos = whereObject.GetPropertyValues();
 
             string sql = $"SELECT";
             if (!options.Offset.HasValue && options.Count.HasValue)
@@ -83,7 +83,7 @@ namespace Silmoon.Data.SqlServer
         {
             if (options == null) options = SqlQueryOptions.Create();
             if ((options.Count.HasValue || options.Offset.HasValue) && (options.Sorts == null || options.Sorts.Count() == 0)) throw new ArgumentException("指定分页参数的时候不能缺少Sorts指定。", "SqlQueryOptions::Sorts");
-            var fieldInfos = getFieldInfos(whereObject, true);
+            var fieldInfos = whereObject.GetPropertyValues();
 
             string sql = $"SELECT";
             if (!options.Offset.HasValue && options.Count.HasValue)
@@ -113,7 +113,7 @@ namespace Silmoon.Data.SqlServer
         {
             if (options == null) options = SqlQueryOptions.Create();
             if ((options.Count.HasValue || options.Offset.HasValue) && (options.Sorts == null || options.Sorts.Count() == 0)) throw new ArgumentException("指定分页参数的时候不能缺少Sorts指定。", "SqlQueryOptions::Sorts");
-            var fieldInfos = getFieldInfos(whereObject, true);
+            var fieldInfos = whereObject.GetPropertyValues();
 
             string sql = $"SELECT";
             if (!options.Offset.HasValue && options.Count.HasValue)
@@ -146,7 +146,7 @@ namespace Silmoon.Data.SqlServer
         {
             if (options == null) options = SqlQueryOptions.Create();
             if ((options.Count.HasValue || options.Offset.HasValue) && (options.Sorts == null || options.Sorts.Count() == 0)) throw new ArgumentException("指定分页参数的时候不能缺少Sorts指定。", "SqlQueryOptions::Sorts");
-            var fieldInfos = getFieldInfos(whereObject, true);
+            var fieldInfos = whereObject.GetPropertyValues();
 
             string sql = $"SELECT";
             if (!options.Offset.HasValue && options.Count.HasValue)
@@ -175,7 +175,7 @@ namespace Silmoon.Data.SqlServer
         {
             if (options == null) options = SqlQueryOptions.Create();
             if ((options.Count.HasValue || options.Offset.HasValue) && (options.Sorts == null || options.Sorts.Count() == 0)) throw new ArgumentException("指定分页参数的时候不能缺少Sorts指定。", "SqlQueryOptions::Sorts");
-            var fieldInfos = getFieldInfos(whereObject, true);
+            var fieldInfos = whereObject.GetPropertyValues();
 
             string sql = $"SELECT";
             if (!options.Offset.HasValue && options.Count.HasValue)
@@ -204,7 +204,7 @@ namespace Silmoon.Data.SqlServer
         {
             if (options == null) options = SqlQueryOptions.Create();
             if ((options.Count.HasValue || options.Offset.HasValue) && (options.Sorts == null || options.Sorts.Count() == 0)) throw new ArgumentException("指定分页参数的时候不能缺少Sorts指定。", "SqlQueryOptions::Sorts");
-            var fieldInfos = getFieldInfos(whereObject, true);
+            var fieldInfos = whereObject.GetPropertyValues();
 
             string sql = $"SELECT";
             if (!options.Offset.HasValue && options.Count.HasValue)
@@ -235,22 +235,22 @@ namespace Silmoon.Data.SqlServer
         }
 
 
-        public SqlExecuteResult SetObject<T>(string tableName, T obj, object whereObject, params string[] updateObjectFieldNames) => SetObjectInternal(tableName, obj, null, whereObject, updateObjectFieldNames);
-        public SqlExecuteResult SetObject<T>(string tableName, T obj, ExpandoObject whereObject, params string[] updateObjectFieldNames) => SetObjectInternal(tableName, obj, null, whereObject, updateObjectFieldNames);
-        public SqlExecuteResult SetObject<T>(string tableName, T obj, string whereString, object whereObject = null, params string[] updateObjectFieldNames) => SetObjectInternal(tableName, obj, whereString, whereObject, updateObjectFieldNames);
+        public SqlExecuteResult SetObjects<T>(string tableName, T obj, object whereObject, params string[] updateObjectFieldNames) => SetObjectsInternal(tableName, obj, null, whereObject, updateObjectFieldNames);
+        public SqlExecuteResult SetObjects<T>(string tableName, T obj, ExpandoObject whereObject, params string[] updateObjectFieldNames) => SetObjectsInternal(tableName, obj, null, whereObject, updateObjectFieldNames);
+        public SqlExecuteResult SetObjects<T>(string tableName, T obj, string whereString, object whereObject = null, params string[] updateObjectFieldNames) => SetObjectsInternal(tableName, obj, whereString, whereObject, updateObjectFieldNames);
 
-        public SqlExecuteResult SetObject<T>(string tableName, T obj, object whereObject, params Expression<Func<T, object>>[] updateExpressions) => SetObjectInternal(tableName, obj, null, whereObject, updateExpressions);
-        public SqlExecuteResult SetObject<T>(string tableName, T obj, ExpandoObject whereObject, params Expression<Func<T, object>>[] updateExpressions) => SetObjectInternal(tableName, obj, null, whereObject, updateExpressions);
-        public SqlExecuteResult SetObject<T>(string tableName, T obj, string whereString, object whereObject = null, params Expression<Func<T, object>>[] updateExpressions) => SetObjectInternal(tableName, obj, whereString, whereObject, updateExpressions);
+        public SqlExecuteResult SetObjects<T>(string tableName, T obj, object whereObject, params Expression<Func<T, object>>[] updateExpressions) => SetObjectsInternal(tableName, obj, null, whereObject, updateExpressions);
+        public SqlExecuteResult SetObjects<T>(string tableName, T obj, ExpandoObject whereObject, params Expression<Func<T, object>>[] updateExpressions) => SetObjectsInternal(tableName, obj, null, whereObject, updateExpressions);
+        public SqlExecuteResult SetObjects<T>(string tableName, T obj, string whereString, object whereObject = null, params Expression<Func<T, object>>[] updateExpressions) => SetObjectsInternal(tableName, obj, whereString, whereObject, updateExpressions);
 
 
-        SqlExecuteResult SetObjectInternal(string tableName, object obj, string whereString, object whereObject, params string[] updateObjectFieldNames)
+        SqlExecuteResult SetObjectsInternal(string tableName, object obj, string whereString, object whereObject, params string[] updateObjectFieldNames)
         {
             string sql = $"UPDATE [{tableName}] SET ";
             string[] setNames = updateObjectFieldNames;
-            Dictionary<string, SimplePropertyInfo> setFieldInfos = getFieldInfos(obj, false);
+            var setFieldInfos = obj.GetPropertyValues("id");
 
-            if (setNames.IsNullOrEmpty()) setNames = getPropertyNames(setFieldInfos, false);
+            if (setNames.IsNullOrEmpty()) setNames = setFieldInfos.Select(x => x.Key).ToArray();
 
             foreach (var item in setNames)
             {
@@ -259,9 +259,7 @@ namespace Silmoon.Data.SqlServer
             sql = sql.Substring(0, sql.Length - 2);
 
 
-            Dictionary<string, SimplePropertyInfo> fieldInfos;
-            if (whereObject is ExpandoObject expandoObject) fieldInfos = getFieldInfos(expandoObject, true);
-            else fieldInfos = getFieldInfos(whereObject, true);
+            var fieldInfos = whereObject.GetPropertyValues();
 
             if (whereString.IsNullOrEmpty())
                 makeWhereString(ref sql, ref tableName, ref fieldInfos);
@@ -269,14 +267,14 @@ namespace Silmoon.Data.SqlServer
 
             using (var cmd = SqlServerOperate.GetDataCommand(sql))
             {
-                cmd.AddParameters(getFieldInfos(obj, false), setNames);
+                cmd.AddParameters(obj.GetPropertyValues("id"), setNames);
                 cmd.AddParameters(fieldInfos);
 
                 int returnLine = cmd.ExecuteNonQuery();
                 return new SqlExecuteResult() { ExecuteSqlString = sql, ResponseRows = returnLine };
             }
         }
-        SqlExecuteResult SetObjectInternal<T>(string tableName, T obj, string whereString, object whereObject, params Expression<Func<T, object>>[] updateExpressions)
+        SqlExecuteResult SetObjectsInternal<T>(string tableName, T obj, string whereString, object whereObject, params Expression<Func<T, object>>[] updateExpressions)
         {
             string sql = $"UPDATE [{tableName}] SET ";
 
@@ -294,9 +292,7 @@ namespace Silmoon.Data.SqlServer
             }
             sql = sql.Substring(0, sql.Length - 2);
 
-            Dictionary<string, SimplePropertyInfo> fieldInfos;
-            if (whereObject is ExpandoObject) fieldInfos = getFieldInfos(whereObject as ExpandoObject, true);
-            else fieldInfos = getFieldInfos(whereObject, true);
+            var fieldInfos = whereObject.GetPropertyValues();
 
             if (whereString.IsNullOrEmpty())
                 makeWhereString(ref sql, ref tableName, ref fieldInfos);
@@ -304,7 +300,7 @@ namespace Silmoon.Data.SqlServer
 
             using (var cmd = SqlServerOperate.GetDataCommand(sql))
             {
-                cmd.AddParameters(getFieldInfos(obj, false), updateFieldNames);
+                cmd.AddParameters(obj.GetPropertyValues("id"), updateFieldNames);
                 cmd.AddParameters(fieldInfos);
 
                 int returnLine = cmd.ExecuteNonQuery();
@@ -312,10 +308,10 @@ namespace Silmoon.Data.SqlServer
             }
         }
 
-        public SqlExecuteResult DeleteObject(string tableName, object whereObject)
+        public SqlExecuteResult DeleteObjects(string tableName, object whereObject)
         {
             string sql = $"DELETE [{tableName}]";
-            var fieldInfos = getFieldInfos(whereObject, true);
+            var fieldInfos = whereObject.GetPropertyValues();
             makeWhereString(ref sql, ref tableName, ref fieldInfos);
 
             using (var cmd = SqlServerOperate.GetDataCommand(sql))
@@ -325,10 +321,10 @@ namespace Silmoon.Data.SqlServer
                 return new SqlExecuteResult() { ExecuteSqlString = sql, ResponseRows = i };
             }
         }
-        public SqlExecuteResult DeleteObject(string tableName, ExpandoObject whereObject)
+        public SqlExecuteResult DeleteObjects(string tableName, ExpandoObject whereObject)
         {
             string sql = $"DELETE [{tableName}]";
-            var fieldInfos = getFieldInfos(whereObject, true);
+            var fieldInfos = whereObject.GetPropertyValues();
             makeWhereString(ref sql, ref tableName, ref fieldInfos);
 
             using (var cmd = SqlServerOperate.GetDataCommand(sql))
@@ -338,10 +334,10 @@ namespace Silmoon.Data.SqlServer
                 return new SqlExecuteResult() { ExecuteSqlString = sql, ResponseRows = i };
             }
         }
-        public SqlExecuteResult DeleteObject(string tableName, string whereString, object whereObject = null)
+        public SqlExecuteResult DeleteObjects(string tableName, string whereString, object whereObject = null)
         {
             string sql = $"DELETE [{tableName}]";
-            var fieldInfos = getFieldInfos(whereObject, true);
+            var fieldInfos = whereObject.GetPropertyValues();
             if (!string.IsNullOrEmpty(whereString))
             {
                 sql += " WHERE " + whereString;
@@ -358,7 +354,7 @@ namespace Silmoon.Data.SqlServer
         public int Count(string tableName, object whereObject)
         {
             string sql = $"SELECT COUNT(*) FROM [{tableName}]";
-            var fieldInfos = getFieldInfos(whereObject, true);
+            var fieldInfos = whereObject.GetPropertyValues();
             makeWhereString(ref sql, ref tableName, ref fieldInfos);
 
             using (var cmd = SqlServerOperate.GetDataCommand(sql))
@@ -371,7 +367,7 @@ namespace Silmoon.Data.SqlServer
         public int Count(string tableName, ExpandoObject whereObject)
         {
             string sql = $"SELECT COUNT(*) FROM [{tableName}]";
-            var fieldInfos = getFieldInfos(whereObject, true);
+            var fieldInfos = whereObject.GetPropertyValues();
             makeWhereString(ref sql, ref tableName, ref fieldInfos);
 
             using (var cmd = SqlServerOperate.GetDataCommand(sql))
@@ -384,7 +380,7 @@ namespace Silmoon.Data.SqlServer
         public int Count(string tableName, string whereString, object whereObject = null)
         {
             string sql = $"SELECT COUNT(*) FROM [{tableName}]";
-            var fieldInfos = getFieldInfos(whereObject, true);
+            var fieldInfos = whereObject.GetPropertyValues();
             if (!string.IsNullOrEmpty(whereString)) sql += " WHERE " + whereString;
 
             using (var cmd = SqlServerOperate.GetDataCommand(sql))
@@ -488,7 +484,7 @@ namespace Silmoon.Data.SqlServer
         public void CommitTransaction(SqlTransaction sqlTransaction) => SqlServerOperate.CommitTransaction();
         public void RollbackTransaction(SqlTransaction sqlTransaction) => SqlServerOperate.RollbackTransaction();
 
-        private string makeSelectFieldString(Dictionary<string, SimplePropertyInfo> fieldInfos, string tableName, ref SqlQueryOptions options)
+        private string makeSelectFieldString(Dictionary<string, PropertyValueInfo> fieldInfos, string tableName, ref SqlQueryOptions options)
         {
             if (options.FieldOption == SelectFieldOption.All)
             {
@@ -516,7 +512,7 @@ namespace Silmoon.Data.SqlServer
             sql = sql.Substring(0, sql.Length - 5);
             sql += ")";
         }
-        private void makeWhereString(ref string sql, ref string tableName, ref Dictionary<string, SimplePropertyInfo> fieldInfos, bool addWhereStr = true)
+        private void makeWhereString(ref string sql, ref string tableName, ref Dictionary<string, PropertyValueInfo> fieldInfos, bool addWhereStr = true)
         {
             if (fieldInfos.Count != 0)
             {
@@ -555,47 +551,6 @@ namespace Silmoon.Data.SqlServer
                     sql += $" FETCH NEXT {options.Count} ROWS ONLY";
             }
         }
-
-
-        private string[] getPropertyNames(Dictionary<string, SimplePropertyInfo> props, bool includeId = false)
-        {
-            List<string> propertyNames = new List<string>();
-            foreach (var item in props)
-            {
-                if (item.Key.ToLower() == "id" && !includeId) continue;
-                propertyNames.Add(item.Key);
-            }
-            return propertyNames.ToArray();
-        }
-
-        private Dictionary<string, SimplePropertyInfo> getFieldInfos(object obj, bool includeId = false)
-        {
-            Dictionary<string, SimplePropertyInfo> propertyNames = new Dictionary<string, SimplePropertyInfo>();
-            if (obj != null)
-            {
-                var propertyInfos = obj.GetType().GetProperties();
-                foreach (var item in propertyInfos)
-                {
-                    if (item.Name.ToLower() == "id" && !includeId) continue;
-                    propertyNames.Add(item.Name, item.GetFieldInfo(obj));
-                }
-            }
-            return propertyNames;
-        }
-        private Dictionary<string, SimplePropertyInfo> getFieldInfos(ExpandoObject obj, bool includeId = false)
-        {
-            Dictionary<string, SimplePropertyInfo> propertyNames = new Dictionary<string, SimplePropertyInfo>();
-            if (obj != null)
-            {
-                foreach (var item in obj)
-                {
-                    if (item.Key == "id" && !includeId) continue;
-                    propertyNames.Add(item.Key, new SimplePropertyInfo() { Name = item.Key, Value = item.Value, Type = item.Value.GetType() });
-                }
-            }
-            return propertyNames;
-        }
-
 
         public void Dispose()
         {
