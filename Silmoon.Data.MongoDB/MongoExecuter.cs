@@ -453,7 +453,7 @@ namespace Silmoon.Data.MongoDB
 
         UpdateDefinition<T> MakeUpdate<T>(T obj, params string[] updateObjectFieldNames)
         {
-            var paras = obj.GetProperties();
+            var paras = obj.GetPropertyValueInfoDictionary();
             var updateBuilder = Builders<T>.Update;
             UpdateDefinition<T> update = null;
 
@@ -462,8 +462,8 @@ namespace Silmoon.Data.MongoDB
                 if (updateObjectFieldNames.Contains(item.Key))
                 {
                     if (update is null)
-                        update = updateBuilder.Set(item.Key, item.Value.GetValue(obj));
-                    else update = update.Set(item.Key, item.Value.GetValue(obj));
+                        update = updateBuilder.Set(item.Key, item.Value.Value);
+                    else update = update.Set(item.Key, item.Value.Value);
                 }
             }
 
@@ -492,12 +492,12 @@ namespace Silmoon.Data.MongoDB
         }
         FilterDefinition<T> MakeAeqFilter<T>(object findByObject)
         {
-            var paras = findByObject.GetProperties();
+            var paras = findByObject.GetPropertyValueInfoDictionary();
             var fb = Builders<T>.Filter;
             var filter = fb.Empty;
             foreach (var item in paras)
             {
-                filter &= fb.Eq(item.Key, item.Value.GetValue(findByObject));
+                filter &= fb.Eq(item.Key, item.Value.Value);
             }
             return filter;
         }

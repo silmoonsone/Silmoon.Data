@@ -37,55 +37,55 @@
             // 
             // ctlWriteButton
             // 
-            ctlWriteButton.Location = new Point(119, 64);
+            ctlWriteButton.Location = new Point(93, 12);
             ctlWriteButton.Name = "ctlWriteButton";
             ctlWriteButton.Size = new Size(75, 23);
-            ctlWriteButton.TabIndex = 7;
+            ctlWriteButton.TabIndex = 1;
             ctlWriteButton.Text = "Write";
             ctlWriteButton.UseVisualStyleBackColor = true;
             ctlWriteButton.Click += ctlWriteButton_Click;
             // 
             // ctlAbortSessionButton
             // 
-            ctlAbortSessionButton.Location = new Point(281, 64);
+            ctlAbortSessionButton.Location = new Point(255, 12);
             ctlAbortSessionButton.Name = "ctlAbortSessionButton";
             ctlAbortSessionButton.Size = new Size(75, 23);
-            ctlAbortSessionButton.TabIndex = 9;
+            ctlAbortSessionButton.TabIndex = 4;
             ctlAbortSessionButton.Text = "AbortSession";
             ctlAbortSessionButton.UseVisualStyleBackColor = true;
             ctlAbortSessionButton.Click += ctlAbortSessionButton_Click;
             // 
             // ctlCommitSessionButton
             // 
-            ctlCommitSessionButton.Location = new Point(200, 64);
+            ctlCommitSessionButton.Location = new Point(174, 12);
             ctlCommitSessionButton.Name = "ctlCommitSessionButton";
             ctlCommitSessionButton.Size = new Size(75, 23);
-            ctlCommitSessionButton.TabIndex = 8;
+            ctlCommitSessionButton.TabIndex = 3;
             ctlCommitSessionButton.Text = "CommitSession";
             ctlCommitSessionButton.UseVisualStyleBackColor = true;
             ctlCommitSessionButton.Click += ctlCommitSessionButton_Click;
             // 
             // ctlWriteBySessionButton
             // 
-            ctlWriteBySessionButton.Location = new Point(119, 35);
+            ctlWriteBySessionButton.Location = new Point(93, 41);
             ctlWriteBySessionButton.Name = "ctlWriteBySessionButton";
             ctlWriteBySessionButton.Size = new Size(75, 23);
-            ctlWriteBySessionButton.TabIndex = 6;
+            ctlWriteBySessionButton.TabIndex = 2;
             ctlWriteBySessionButton.Text = "WriteBySession";
             ctlWriteBySessionButton.UseVisualStyleBackColor = true;
             ctlWriteBySessionButton.Click += ctlWriteBySessionButton_Click;
             // 
             // ctlStartSessionButton
             // 
-            ctlStartSessionButton.Location = new Point(38, 64);
+            ctlStartSessionButton.Location = new Point(12, 12);
             ctlStartSessionButton.Name = "ctlStartSessionButton";
             ctlStartSessionButton.Size = new Size(75, 23);
-            ctlStartSessionButton.TabIndex = 5;
+            ctlStartSessionButton.TabIndex = 0;
             ctlStartSessionButton.Text = "StartSession";
             ctlStartSessionButton.UseVisualStyleBackColor = true;
             ctlStartSessionButton.Click += ctlStartSessionButton_Click;
             // 
-            // Form1
+            // MongoDBTestForm
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -95,7 +95,8 @@
             Controls.Add(ctlCommitSessionButton);
             Controls.Add(ctlWriteBySessionButton);
             Controls.Add(ctlStartSessionButton);
-            Name = "Form1";
+            Name = "MongoDBTestForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             ResumeLayout(false);
         }

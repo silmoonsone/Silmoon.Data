@@ -1,9 +1,19 @@
-﻿using Silmoon.Data.QueryModel;
+﻿
+/* 项目“Silmoon.Data (netstandard2.0)”的未合并的更改
+在此之前:
+using Silmoon.Data.QueryModel;
+在此之后:
+using Silmoon;
+using Silmoon.Data;
+using Silmoon.Data;
+using Silmoon.Data.QueryModel;
+*/
+using Silmoon.Data.QueryModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Silmoon.Data.SqlServer
+namespace Silmoon.Data
 {
     public class SqlQueryOptions : QueryOptions
     {

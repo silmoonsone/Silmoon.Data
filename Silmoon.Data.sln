@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silmoon.Data", "Silmoon.Data\Silmoon.Data.csproj", "{1B32D01B-027F-474D-B798-EEB8D113D576}"
 EndProject
@@ -21,6 +21,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silmoon.Data.SqlServer", "Silmoon.Data.SqlServer\Silmoon.Data.SqlServer.csproj", "{EF87209D-A706-41CC-A647-9FE61AF4D0AA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormTest", "WinFormTest\WinFormTest.csproj", "{E7E11958-3964-4A60-A61B-BCF567A24D3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silmoon.Data.PostgreSql", "Silmoon.Data.PostgreSql\Silmoon.Data.PostgreSql.csproj", "{2D61AA7C-4786-461C-875D-C88ED8F185F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,10 @@ Global
 		{E7E11958-3964-4A60-A61B-BCF567A24D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7E11958-3964-4A60-A61B-BCF567A24D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7E11958-3964-4A60-A61B-BCF567A24D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D61AA7C-4786-461C-875D-C88ED8F185F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D61AA7C-4786-461C-875D-C88ED8F185F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D61AA7C-4786-461C-875D-C88ED8F185F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D61AA7C-4786-461C-875D-C88ED8F185F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

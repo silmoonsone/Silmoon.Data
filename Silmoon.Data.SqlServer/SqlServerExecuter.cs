@@ -14,22 +14,22 @@ using Silmoon.Runtime;
 
 namespace Silmoon.Data.SqlServer
 {
-    public class SqlExecuter : IDisposable
+    public class SqlServerExecuter : IDisposable
     {
         SqlServerOperate SqlServerOperate { get; set; }
-        public SqlConnection SqlConnection { get; }
+        public SqlConnection Connection { get; }
 
-        public SqlExecuter(string connectionString)
+        public SqlServerExecuter(string connectionString)
         {
-            SqlConnection = new SqlConnection(connectionString);
-            SqlConnection.Open();
-            SqlServerOperate = new SqlServerOperate(SqlConnection);
+            Connection = new SqlConnection(connectionString);
+            Connection.Open();
+            SqlServerOperate = new SqlServerOperate(Connection);
         }
         public SqlExecuteResult AddObject<T>(string tableName, T obj)
         {
             var fieldInfos = obj.GetPropertyValueInfoDictionary("id");
 
-            string sql = $"INSERT INTO [{SqlHelper.SafeSqlWord(tableName)}] (";
+            string sql = $"INSERT INTO [{SqlServerHelper.SafeSqlWord(tableName)}] (";
             foreach (var item in fieldInfos)
             {
                 sql += "[" + item.Value.Name + "], ";
@@ -397,7 +397,7 @@ namespace Silmoon.Data.SqlServer
             if (isExistResult.Result) return new SqlExecuteResult<bool>() { Result = false, ResponseRows = isExistResult.ResponseRows, ExecuteSqlString = isExistResult.ExecuteSqlString };
             var props = typeof(T).GetProperties();
 
-            string sql = $"CREATE TABLE [{SqlHelper.SafeSqlWord(tableName)}]\r\n";
+            string sql = $"CREATE TABLE [{SqlServerHelper.SafeSqlWord(tableName)}]\r\n";
             sql += $"(\r\n";
             sql += $"[id] int NOT NULL IDENTITY (1, 1),\r\n";
             foreach (var item in props)
@@ -554,7 +554,7 @@ namespace Silmoon.Data.SqlServer
 
         public void Dispose()
         {
-            SqlConnection.Dispose();
+            Connection.Dispose();
         }
     }
 }

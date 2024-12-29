@@ -14,6 +14,7 @@ namespace WinFormTest
 {
     public partial class SqlServerTestForm : Form
     {
+        SqlServerExecuter sqlExecuter = new SqlServerExecuter("Server=(local); Uid=TestDB; Pwd=TestDB; Database=TestDB; TrustServerCertificate=true");
         public SqlServerTestForm()
         {
             InitializeComponent();
@@ -21,22 +22,27 @@ namespace WinFormTest
 
         private void ctlMainTestButton_Click(object sender, EventArgs e)
         {
-            using SqlExecuter sqlExecuter = new SqlExecuter("Server=(local); Uid=TestDB; Pwd=TestDB; Database=TestDB; TrustServerCertificate=true");
             var user = new User()
             {
                 Username = "Silmoon"
             };
+            //using var trans = sqlExecuter.BeginTransaction();
 
-            using (var trans = sqlExecuter.BeginTransaction())
-            {
-                sqlExecuter.CreateTable<User>("users");
+            sqlExecuter.CreateTable<User>("users");
 
-                sqlExecuter.AddObject("users", user);
-                sqlExecuter.CommitTransaction(trans);
-            }
+            sqlExecuter.AddObject("users", user);
+            //sqlExecuter.CommitTransaction(trans);
 
-            //sqlExecuter.AddObject("users", user);
+        }
 
+        private void ctlUpdateTestButton_Click(object sender, EventArgs e)
+        {
+            sqlExecuter.SetObjects("users", new User() { Username = "setSilmoon" }, new { id = 4 }, x => x.Username);
+        }
+
+        private void ctlDeleteTestButton_Click(object sender, EventArgs e)
+        {
+            sqlExecuter.DeleteObjects("users", new { id = 4 });
         }
     }
     class User : SqlObject

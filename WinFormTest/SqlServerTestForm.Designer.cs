@@ -28,25 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ctlMainTestButton = new Button();
+            ctlInsertTestButton = new Button();
+            ctlUpdateTestButton = new Button();
+            ctlDeleteTestButton = new Button();
             SuspendLayout();
             // 
-            // ctlMainTestButton
+            // ctlInsertTestButton
             // 
-            ctlMainTestButton.Location = new Point(12, 12);
-            ctlMainTestButton.Name = "ctlMainTestButton";
-            ctlMainTestButton.Size = new Size(112, 23);
-            ctlMainTestButton.TabIndex = 0;
-            ctlMainTestButton.Text = "MainTest";
-            ctlMainTestButton.UseVisualStyleBackColor = true;
-            ctlMainTestButton.Click += ctlMainTestButton_Click;
+            ctlInsertTestButton.Location = new Point(12, 12);
+            ctlInsertTestButton.Name = "ctlInsertTestButton";
+            ctlInsertTestButton.Size = new Size(75, 23);
+            ctlInsertTestButton.TabIndex = 0;
+            ctlInsertTestButton.Text = "Insert Test";
+            ctlInsertTestButton.UseVisualStyleBackColor = true;
+            ctlInsertTestButton.Click += ctlMainTestButton_Click;
+            // 
+            // ctlUpdateTestButton
+            // 
+            ctlUpdateTestButton.Location = new Point(93, 12);
+            ctlUpdateTestButton.Name = "ctlUpdateTestButton";
+            ctlUpdateTestButton.Size = new Size(75, 23);
+            ctlUpdateTestButton.TabIndex = 1;
+            ctlUpdateTestButton.Text = "Update Test";
+            ctlUpdateTestButton.UseVisualStyleBackColor = true;
+            ctlUpdateTestButton.Click += ctlUpdateTestButton_Click;
+            // 
+            // ctlDeleteTestButton
+            // 
+            ctlDeleteTestButton.Location = new Point(174, 12);
+            ctlDeleteTestButton.Name = "ctlDeleteTestButton";
+            ctlDeleteTestButton.Size = new Size(75, 23);
+            ctlDeleteTestButton.TabIndex = 2;
+            ctlDeleteTestButton.Text = "Delete Test";
+            ctlDeleteTestButton.UseVisualStyleBackColor = true;
+            ctlDeleteTestButton.Click += ctlDeleteTestButton_Click;
             // 
             // SqlServerTestForm
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(820, 503);
-            Controls.Add(ctlMainTestButton);
+            Controls.Add(ctlDeleteTestButton);
+            Controls.Add(ctlUpdateTestButton);
+            Controls.Add(ctlInsertTestButton);
             Name = "SqlServerTestForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "SqlServerTestForm";
@@ -55,6 +79,8 @@
 
         #endregion
 
-        private Button ctlMainTestButton;
+        private Button ctlInsertTestButton;
+        private Button ctlUpdateTestButton;
+        private Button ctlDeleteTestButton;
     }
 }

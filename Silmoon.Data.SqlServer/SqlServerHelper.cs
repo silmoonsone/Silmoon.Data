@@ -24,7 +24,7 @@ using Silmoon.Data.SqlServer;
 
 namespace Silmoon.Data.SqlServer
 {
-    public static class SqlHelper
+    public static class SqlServerHelper
     {
         private static readonly string[] regTypeClassName = { "DateTime", "String", "Boolean", "Int16", "UInt16", "Int32", "UInt32", "Int64", "UInt64", "Decimal", "Guid", "ObjectId", "Byte[]", "Int32[]", "String[]" };
         public static (T[] Results, NameObjectCollection<object>[] DataCollections) DeserializeObjects<T>(this SqlDataReader reader, string[] excludedField = null) where T : new()

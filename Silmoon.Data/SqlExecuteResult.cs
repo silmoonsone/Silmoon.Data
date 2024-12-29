@@ -1,4 +1,14 @@
 ﻿using Silmoon.Collections;
+
+/* 项目“Silmoon.Data (netstandard2.0)”的未合并的更改
+在此之前:
+using System;
+在此之后:
+using Silmoon.Data;
+using Silmoon.Data;
+using Silmoon.Data.SqlServer;
+using System;
+*/
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +16,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Silmoon.Data.SqlServer
+namespace Silmoon.Data
 {
     public class SqlExecuteResult
     {
