@@ -27,7 +27,7 @@ namespace Silmoon.Data.SqlServer
         }
         public SqlExecuteResult AddObject<T>(string tableName, T obj)
         {
-            var fieldInfos = obj.GetPropertyValues("id");
+            var fieldInfos = obj.GetPropertyValueInfoDictionary("id");
 
             string sql = $"INSERT INTO [{SqlHelper.SafeSqlWord(tableName)}] (";
             foreach (var item in fieldInfos)
@@ -53,7 +53,7 @@ namespace Silmoon.Data.SqlServer
         {
             if (options == null) options = SqlQueryOptions.Create();
             if ((options.Count.HasValue || options.Offset.HasValue) && (options.Sorts == null || options.Sorts.Count() == 0)) throw new ArgumentException("指定分页参数的时候不能缺少Sorts指定。", "SqlQueryOptions::Sorts");
-            var fieldInfos = whereObject.GetPropertyValues();
+            var fieldInfos = whereObject.GetPropertyValueInfoDictionary();
 
             string sql = $"SELECT";
             if (!options.Offset.HasValue && options.Count.HasValue)
@@ -83,7 +83,7 @@ namespace Silmoon.Data.SqlServer
         {
             if (options == null) options = SqlQueryOptions.Create();
             if ((options.Count.HasValue || options.Offset.HasValue) && (options.Sorts == null || options.Sorts.Count() == 0)) throw new ArgumentException("指定分页参数的时候不能缺少Sorts指定。", "SqlQueryOptions::Sorts");
-            var fieldInfos = whereObject.GetPropertyValues();
+            var fieldInfos = whereObject.GetPropertyValueInfoDictionary();
 
             string sql = $"SELECT";
             if (!options.Offset.HasValue && options.Count.HasValue)
@@ -113,7 +113,7 @@ namespace Silmoon.Data.SqlServer
         {
             if (options == null) options = SqlQueryOptions.Create();
             if ((options.Count.HasValue || options.Offset.HasValue) && (options.Sorts == null || options.Sorts.Count() == 0)) throw new ArgumentException("指定分页参数的时候不能缺少Sorts指定。", "SqlQueryOptions::Sorts");
-            var fieldInfos = whereObject.GetPropertyValues();
+            var fieldInfos = whereObject.GetPropertyValueInfoDictionary();
 
             string sql = $"SELECT";
             if (!options.Offset.HasValue && options.Count.HasValue)
@@ -146,7 +146,7 @@ namespace Silmoon.Data.SqlServer
         {
             if (options == null) options = SqlQueryOptions.Create();
             if ((options.Count.HasValue || options.Offset.HasValue) && (options.Sorts == null || options.Sorts.Count() == 0)) throw new ArgumentException("指定分页参数的时候不能缺少Sorts指定。", "SqlQueryOptions::Sorts");
-            var fieldInfos = whereObject.GetPropertyValues();
+            var fieldInfos = whereObject.GetPropertyValueInfoDictionary();
 
             string sql = $"SELECT";
             if (!options.Offset.HasValue && options.Count.HasValue)
@@ -175,7 +175,7 @@ namespace Silmoon.Data.SqlServer
         {
             if (options == null) options = SqlQueryOptions.Create();
             if ((options.Count.HasValue || options.Offset.HasValue) && (options.Sorts == null || options.Sorts.Count() == 0)) throw new ArgumentException("指定分页参数的时候不能缺少Sorts指定。", "SqlQueryOptions::Sorts");
-            var fieldInfos = whereObject.GetPropertyValues();
+            var fieldInfos = whereObject.GetPropertyValueInfoDictionary();
 
             string sql = $"SELECT";
             if (!options.Offset.HasValue && options.Count.HasValue)
@@ -204,7 +204,7 @@ namespace Silmoon.Data.SqlServer
         {
             if (options == null) options = SqlQueryOptions.Create();
             if ((options.Count.HasValue || options.Offset.HasValue) && (options.Sorts == null || options.Sorts.Count() == 0)) throw new ArgumentException("指定分页参数的时候不能缺少Sorts指定。", "SqlQueryOptions::Sorts");
-            var fieldInfos = whereObject.GetPropertyValues();
+            var fieldInfos = whereObject.GetPropertyValueInfoDictionary();
 
             string sql = $"SELECT";
             if (!options.Offset.HasValue && options.Count.HasValue)
@@ -248,7 +248,7 @@ namespace Silmoon.Data.SqlServer
         {
             string sql = $"UPDATE [{tableName}] SET ";
             string[] setNames = updateObjectFieldNames;
-            var setFieldInfos = obj.GetPropertyValues("id");
+            var setFieldInfos = obj.GetPropertyValueInfoDictionary("id");
 
             if (setNames.IsNullOrEmpty()) setNames = setFieldInfos.Select(x => x.Key).ToArray();
 
@@ -259,7 +259,7 @@ namespace Silmoon.Data.SqlServer
             sql = sql.Substring(0, sql.Length - 2);
 
 
-            var fieldInfos = whereObject.GetPropertyValues();
+            var fieldInfos = whereObject.GetPropertyValueInfoDictionary();
 
             if (whereString.IsNullOrEmpty())
                 makeWhereString(ref sql, ref tableName, ref fieldInfos);
@@ -267,7 +267,7 @@ namespace Silmoon.Data.SqlServer
 
             using (var cmd = SqlServerOperate.GetDataCommand(sql))
             {
-                cmd.AddParameters(obj.GetPropertyValues("id"), setNames);
+                cmd.AddParameters(obj.GetPropertyValueInfoDictionary("id"), setNames);
                 cmd.AddParameters(fieldInfos);
 
                 int returnLine = cmd.ExecuteNonQuery();
@@ -292,7 +292,7 @@ namespace Silmoon.Data.SqlServer
             }
             sql = sql.Substring(0, sql.Length - 2);
 
-            var fieldInfos = whereObject.GetPropertyValues();
+            var fieldInfos = whereObject.GetPropertyValueInfoDictionary();
 
             if (whereString.IsNullOrEmpty())
                 makeWhereString(ref sql, ref tableName, ref fieldInfos);
@@ -300,7 +300,7 @@ namespace Silmoon.Data.SqlServer
 
             using (var cmd = SqlServerOperate.GetDataCommand(sql))
             {
-                cmd.AddParameters(obj.GetPropertyValues("id"), updateFieldNames);
+                cmd.AddParameters(obj.GetPropertyValueInfoDictionary("id"), updateFieldNames);
                 cmd.AddParameters(fieldInfos);
 
                 int returnLine = cmd.ExecuteNonQuery();
@@ -311,7 +311,7 @@ namespace Silmoon.Data.SqlServer
         public SqlExecuteResult DeleteObjects(string tableName, object whereObject)
         {
             string sql = $"DELETE [{tableName}]";
-            var fieldInfos = whereObject.GetPropertyValues();
+            var fieldInfos = whereObject.GetPropertyValueInfoDictionary();
             makeWhereString(ref sql, ref tableName, ref fieldInfos);
 
             using (var cmd = SqlServerOperate.GetDataCommand(sql))
@@ -324,7 +324,7 @@ namespace Silmoon.Data.SqlServer
         public SqlExecuteResult DeleteObjects(string tableName, ExpandoObject whereObject)
         {
             string sql = $"DELETE [{tableName}]";
-            var fieldInfos = whereObject.GetPropertyValues();
+            var fieldInfos = whereObject.GetPropertyValueInfoDictionary();
             makeWhereString(ref sql, ref tableName, ref fieldInfos);
 
             using (var cmd = SqlServerOperate.GetDataCommand(sql))
@@ -337,7 +337,7 @@ namespace Silmoon.Data.SqlServer
         public SqlExecuteResult DeleteObjects(string tableName, string whereString, object whereObject = null)
         {
             string sql = $"DELETE [{tableName}]";
-            var fieldInfos = whereObject.GetPropertyValues();
+            var fieldInfos = whereObject.GetPropertyValueInfoDictionary();
             if (!string.IsNullOrEmpty(whereString))
             {
                 sql += " WHERE " + whereString;
@@ -354,7 +354,7 @@ namespace Silmoon.Data.SqlServer
         public int Count(string tableName, object whereObject)
         {
             string sql = $"SELECT COUNT(*) FROM [{tableName}]";
-            var fieldInfos = whereObject.GetPropertyValues();
+            var fieldInfos = whereObject.GetPropertyValueInfoDictionary();
             makeWhereString(ref sql, ref tableName, ref fieldInfos);
 
             using (var cmd = SqlServerOperate.GetDataCommand(sql))
@@ -367,7 +367,7 @@ namespace Silmoon.Data.SqlServer
         public int Count(string tableName, ExpandoObject whereObject)
         {
             string sql = $"SELECT COUNT(*) FROM [{tableName}]";
-            var fieldInfos = whereObject.GetPropertyValues();
+            var fieldInfos = whereObject.GetPropertyValueInfoDictionary();
             makeWhereString(ref sql, ref tableName, ref fieldInfos);
 
             using (var cmd = SqlServerOperate.GetDataCommand(sql))
@@ -380,7 +380,7 @@ namespace Silmoon.Data.SqlServer
         public int Count(string tableName, string whereString, object whereObject = null)
         {
             string sql = $"SELECT COUNT(*) FROM [{tableName}]";
-            var fieldInfos = whereObject.GetPropertyValues();
+            var fieldInfos = whereObject.GetPropertyValueInfoDictionary();
             if (!string.IsNullOrEmpty(whereString)) sql += " WHERE " + whereString;
 
             using (var cmd = SqlServerOperate.GetDataCommand(sql))
